@@ -61,26 +61,14 @@ def print_task_list(task_list: TaskList) -> None:
         console.print("  [dim]No tasks found.[/dim]")
         return
 
-    table = Table(show_header=True, header_style="bold")
-    table.add_column("#", style="dim", width=3)
-    table.add_column("Title", min_width=30)
-    table.add_column("Priority", width=10)
-    table.add_column("Assignee", width=15)
-    table.add_column("Tags", width=20)
-
     for i, task in enumerate(task_list.tasks, 1):
         color = PRIORITY_COLORS.get(task.priority, "white")
         priority_str = f"[{color}]{task.priority.value.upper()}[/{color}]"
-        assignee = task.assignee or "-"
-        tags = ", ".join(task.tags) if task.tags else "-"
+        assignee = f" | Assignee: {task.assignee}" if task.assignee else ""
+        tags = f" | Tags: {', '.join(task.tags)}" if task.tags else ""
 
-        table.add_row(
-            str(i),
-            task.title,
-            priority_str,
-            assignee,
-            tags,
-        )
-
-    console.print(table)
-    console.print()
+        console.print(f"[bold]{i}. {task.title}[/bold]")
+        console.print(f"   Priority: {priority_str}{assignee}{tags}")
+        if task.description:
+            console.print(f"   [dim]{task.description}[/dim]")
+        console.print()

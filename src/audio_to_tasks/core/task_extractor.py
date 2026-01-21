@@ -28,12 +28,12 @@ logger = logging.getLogger(__name__)
 
 TASK_EXTRACTION_PROMPT = """You are a task extraction assistant. Analyze the following transcription from a meeting or voice note and extract actionable tasks.
 
-For each task, provide:
+For each task, you MUST provide:
 - title: A clear, concise task title (action verb + object)
-- description: Optional additional context
+- description: REQUIRED - A brief summary explaining what needs to be done and any relevant context from the transcription. Always include this field with meaningful content.
 - priority: "low", "medium", "high", or "urgent"
-- assignee: Person responsible (if mentioned)
-- due_date: Deadline in ISO format (if mentioned)
+- assignee: Person responsible (if mentioned, otherwise null)
+- due_date: Deadline in ISO format (if mentioned, otherwise null)
 - tags: Relevant categories
 
 Return ONLY valid JSON in this exact format:
@@ -41,7 +41,7 @@ Return ONLY valid JSON in this exact format:
     "tasks": [
         {{
             "title": "Task title here",
-            "description": "Optional description",
+            "description": "Brief summary of the task with context from the transcription",
             "priority": "medium",
             "assignee": null,
             "due_date": null,
@@ -55,7 +55,7 @@ TRANSCRIPTION:
 {transcription}
 ---
 
-Extract all tasks from the transcription above. If no clear tasks are found, return {{"tasks": []}}.
+Extract all tasks from the transcription above. Each task MUST have a description summarizing what needs to be done. If no clear tasks are found, return {{"tasks": []}}.
 """
 
 
