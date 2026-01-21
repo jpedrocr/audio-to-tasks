@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 class Transcriber:
     """Service for transcribing audio files to text using Whisper."""
 
-    SUPPORTED_FORMATS = {"mp3", "wav", "m4a", "flac", "ogg", "webm", "wma"}
+    SUPPORTED_FORMATS = {"mp3", "wav", "m4a", "flac", "ogg", "webm", "wma", "opus"}
 
     def __init__(self, config: WhisperConfig | None = None) -> None:
         """Initialize transcriber with configuration.

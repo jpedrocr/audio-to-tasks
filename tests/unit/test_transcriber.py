@@ -25,6 +25,7 @@ class TestTranscriber:
         assert "flac" in Transcriber.SUPPORTED_FORMATS
         assert "ogg" in Transcriber.SUPPORTED_FORMATS
         assert "webm" in Transcriber.SUPPORTED_FORMATS
+        assert "opus" in Transcriber.SUPPORTED_FORMATS
 
     def test_init_default_config(self) -> None:
         """Test transcriber initialization with default config."""
