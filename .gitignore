@@ -96,3 +96,6 @@ Thumbs.db
 
 # Artefactos do graphify (grafo, cache, HTML) — regeneráveis, não versionar.
 graphify-out/
+
+# Settings locais do Claude Code — não versionar
+.claude/
