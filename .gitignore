@@ -93,3 +93,6 @@ Thumbs.db
 *.ogg
 *.webm
 !tests/fixtures/audio/*
+
+# Artefactos do graphify (grafo, cache, HTML) — regeneráveis, não versionar.
+graphify-out/
