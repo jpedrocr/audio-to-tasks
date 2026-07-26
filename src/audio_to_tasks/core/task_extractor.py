@@ -93,7 +93,10 @@ class TaskExtractor:
         try:
             models_response = self.client.list()
             models: list[dict[str, Any]] = models_response.get("models", [])
-            model_names = [m.get("name", "") for m in models]
+            # ollama >= 0.4 renamed this field from "name" to "model". Reading
+            # only "name" made every model look absent, so the health check
+            # failed against a perfectly working server.
+            model_names = [m.get("model") or m.get("name") or "" for m in models]
 
             model_base = self._config.model.split(":")[0]
             if not any(model_base in name for name in model_names):
